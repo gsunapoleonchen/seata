@@ -26,7 +26,6 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>seata-all</artifactId>
-
     <name>Seata All-in-one ${project.version}</name>
     <description>Seata is an easy-to-use, high-performance, java based, open source distributed transaction solution.</description>
 
@@ -146,12 +145,12 @@
         </dependency>
         <dependency>
             <groupId>io.seata</groupId>
-            <artifactId>seata-dubbo</artifactId>
+            <artifactId>seata-http</artifactId>
             <version>${project.version}</version>
         </dependency>
         <dependency>
             <groupId>io.seata</groupId>
-            <artifactId>seata-http</artifactId>
+            <artifactId>seata-http-jakarta</artifactId>
             <version>${project.version}</version>
         </dependency>
         <dependency>
@@ -398,13 +397,18 @@
             <artifactId>commons-pool</artifactId>
         </dependency>
         <dependency>
-            <groupId>com.google.protobuf</groupId>
-            <artifactId>protobuf-java</artifactId>
-            <scope>provided</scope>
+            <groupId>org.apache.dubbo.extensions</groupId>
+            <artifactId>dubbo-filter-seata</artifactId>
+            <exclusions>
+                <exclusion>
+                    <groupId>io.seata</groupId>
+                    <artifactId>seata-core</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
         <dependency>
-            <groupId>org.apache.dubbo</groupId>
-            <artifactId>dubbo</artifactId>
+            <groupId>com.google.protobuf</groupId>
+            <artifactId>protobuf-java</artifactId>
             <scope>provided</scope>
         </dependency>
         <dependency>
@@ -418,8 +422,8 @@
             <scope>provided</scope>
         </dependency>
         <dependency>
-            <groupId>cglib</groupId>
-            <artifactId>cglib</artifactId>
+            <groupId>net.bytebuddy</groupId>
+            <artifactId>byte-buddy</artifactId>
         </dependency>
         <dependency>
             <groupId>aopalliance</groupId>
@@ -722,6 +726,7 @@
                             <dependencySourceIncludes>
                                 <dependencySourceInclude>io.seata:seata-*</dependencySourceInclude>
                             </dependencySourceIncludes>
+                            <additionalparam>-Xdoclint:none</additionalparam>
                         </configuration>
                         <executions>
                             <execution>
